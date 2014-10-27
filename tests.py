@@ -3,6 +3,7 @@ from fizzbuzzKata import fizzbuzz
 from primeFactorsKata import primeFactors
 from romansKata import toRoman
 from gatoKata import GetTablero, JuegoContinua, IntentarTirada, IniciaJuego
+from gameOfLifeKata import GetUniverse, NextOfspring
 
 class TestKatas(unittest.TestCase):
     
@@ -18,6 +19,8 @@ class TestKatas(unittest.TestCase):
                             7: "VII", 8: "VIII", 9: "IX", 100: "C",
                             56: "LVI", 143: "CXLIII", 678: "DCLXXVIII",
                             999: "CMXCIX", 1583: "MDLXXXIII", 3982: "MMMCMLXXXII"}
+        
+        
         self.tableroVacio = " 1 │ 2 │ 3 \n───┼───┼───\n 4 │ 5 │ 6 \n───┼───┼───\n 7 │ 8 │ 9 "
         self.errFueraRango = "La tirada debe de estar entre 1 y 9"
         self.errOcupada = "La casilla ya esta ocupada"
@@ -46,6 +49,27 @@ class TestKatas(unittest.TestCase):
         self.tableroEmpateSeis = " X │ O │ 3 \n───┼───┼───\n O │ O │ X \n───┼───┼───\n X │ X │ 9 "
         self.tableroEmpateSiete = " X │ O │ 3 \n───┼───┼───\n O │ O │ X \n───┼───┼───\n X │ X │ O "
         self.tableroEmpateOcho = " X │ O │ X \n───┼───┼───\n O │ O │ X \n───┼───┼───\n X │ X │ O "
+        
+        self.u1 = "48............*......**..........."
+        self.u1Ofspring1 = "........\n....*...\n...**...\n........\n"
+        self.u1Ofspring2 = "........\n...**...\n...**...\n........\n"
+        self.u1Ofspring3 = "........\n...**...\n...**...\n........\n"
+        
+        self.u2 = "99....*.*....**...*.....*....**....*......**...*......*.***.***....****..*..*..*..*"
+        self.u2Ofspring1 = "....*.*..\n..**...*.\n....*....\n**....*..\n....**...\n*......*.\n***.***..\n..****..*\n..*..*..*\n"
+        self.u2Ofspring2 = "...*.....\n...***...\n.***.....\n....*....\n**...**.*\n*..*....*\n*.*...***\n*......*.\n..*..*...\n"
+        self.u2Ofspring3 = "...*.....\n.........\n..*..*...\n*..***..*\n**..**.*.\n..*..*...\n......*..\n*......*.\n.........\n"
+        self.u2Ofspring4 = ".........\n.........\n...*.*..*\n*.**....*\n***.....*\n**..**...\n......*..\n.........\n.........\n"
+        self.u2Ofspring5 = ".........\n.........\n..***...*\n...**..*.\n....*...*\n..*..*...\n*....*...\n.........\n.........\n"
+        self.u2Ofspring6 = ".........\n...*.....\n..*.*....\n..*..*.**\n....**..*\n....**...\n.........\n.........\n.........\n"
+        self.u2Ofspring7 = ".........\n...*.....\n..*.*....\n.....****\n...*...**\n....**...\n.........\n.........\n.........\n"
+        self.u2Ofspring8 = ".........\n...*.....\n...*****.\n...****.*\n........*\n....*....\n.........\n.........\n.........\n"
+        self.u2Ofspring9 = ".........\n...*.**..\n..*....*.\n...*....*\n...*...*.\n.........\n.........\n.........\n.........\n"
+        self.u2Ofspring10 = ".........\n......*..\n..***.**.\n..**...**\n.........\n.........\n.........\n.........\n.........\n"
+        self.u2Ofspring11 = ".........\n...*.***.\n..*.***.*\n..*.*.***\n.........\n.........\n.........\n.........\n.........\n"
+        self.u2Ofspring12 = "......*..\n...*...*.\n..*.....*\n....*.*.*\n.......*.\n.........\n.........\n.........\n.........\n"
+        self.u2Ofspring13 = ".........\n.......*.\n...*....*\n........*\n.......*.\n.........\n.........\n.........\n.........\n"
+        self.u2Ofspring14 = ".........\n.........\n.......**\n.......**\n.........\n.........\n.........\n.........\n.........\n"
         
     def test_fizzbuzz(self):
         for x in self.fizzBuzzSeq.items():
@@ -119,6 +143,41 @@ class TestKatas(unittest.TestCase):
         self.assertEqual(GetTablero(), self.tableroEmpateSiete)
         self.assertEqual(IntentarTirada(3), self.empate)
         self.assertEqual(GetTablero(), self.tableroEmpateOcho)
+        
+    def test_gameOfLife(self):
+        self.assertEqual(GetUniverse(self.u1), self.u1Ofspring1)
+        u = NextOfspring(self.u1)
+        self.assertEqual(GetUniverse(u), self.u1Ofspring2)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u1Ofspring3)
+        
+        self.assertEqual(GetUniverse(self.u2), self.u2Ofspring1)
+        u = NextOfspring(self.u2)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring2)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring3)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring4)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring5)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring6)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring7)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring8)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring9)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring10)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring11)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring12)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring13)
+        u = NextOfspring(u)
+        self.assertEqual(GetUniverse(u), self.u2Ofspring14)
         
 if __name__ == '__main__':
     unittest.main()
