@@ -194,7 +194,7 @@ class TestKatas(unittest.TestCase):
     def test_texasHoldEmKata(self):
         self.assertEqual(GetRankedGame(self.texas1), self.texas1Result)
         self.assertEqual(GetRankedGame(self.texas2), self.texas2Result)
-        
+
 if __name__ == '__main__':
     unittest.main()
     
